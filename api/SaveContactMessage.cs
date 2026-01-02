@@ -60,8 +60,8 @@ public class SaveContactMessage
             _logger.LogInformation("Mensaje guardado con ID: {RowKey}", entity.RowKey);
 
             // Enviar email
-            var emailSent = await SendEmailNotificationAsync(formData);
-
+            // var emailSent = await SendEmailNotificationAsync(formData);
+            var emailSent = false;
             var response = req.CreateResponse(HttpStatusCode.OK);
             await response.WriteAsJsonAsync(new { success = true, message = "Mensaje enviado correctamente", emailNotification = emailSent });
             return response;
