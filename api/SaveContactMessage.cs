@@ -2,7 +2,6 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Azure.Data.Tables;
-using Azure.Communication.Email;
 using System.Net;
 using System.Text.Json;
 
@@ -59,11 +58,8 @@ public class SaveContactMessage
             await tableClient.AddEntityAsync(entity);
             _logger.LogInformation("Mensaje guardado con ID: {RowKey}", entity.RowKey);
 
-            // Enviar email
-            // var emailSent = await SendEmailNotificationAsync(formData);
-            var emailSent = false;
             var response = req.CreateResponse(HttpStatusCode.OK);
-            await response.WriteAsJsonAsync(new { success = true, message = "Mensaje enviado correctamente", emailNotification = emailSent });
+            await response.WriteAsJsonAsync(new { success = true, message = "Mensaje enviado correctamente" });
             return response;
         }
         catch (Exception ex)
@@ -72,48 +68,6 @@ public class SaveContactMessage
             var errorResponse = req.CreateResponse(HttpStatusCode.InternalServerError);
             await errorResponse.WriteAsJsonAsync(new { success = false, error = "Error interno del servidor" });
             return errorResponse;
-        }
-    }
-
-    private async Task<bool> SendEmailNotificationAsync(ContactFormData formData)
-    {
-        var connectionString = Environment.GetEnvironmentVariable("ACS_CONNECTION_STRING");
-        var senderEmail = Environment.GetEnvironmentVariable("ACS_SENDER_EMAIL");
-        var recipientEmail = Environment.GetEnvironmentVariable("NOTIFICATION_EMAIL") ?? "atalavera.0596@gmail.com";
-
-        if (string.IsNullOrEmpty(connectionString) || string.IsNullOrEmpty(senderEmail))
-        {
-            _logger.LogWarning("Azure Communication Services no configurado");
-            return false;
-        }
-
-        try
-        {
-            var emailClient = new EmailClient(connectionString);
-            var subject = $"Nuevo mensaje de contacto: {formData.Subject ?? "Sin asunto"}";
-
-            var htmlContent = $@"
-<html><body>
-<h2>Nuevo Mensaje de Contacto</h2>
-<p><strong>Nombre:</strong> {formData.Name}</p>
-<p><strong>Email:</strong> {formData.Email}</p>
-<p><strong>Asunto:</strong> {formData.Subject ?? "Sin asunto"}</p>
-<p><strong>Mensaje:</strong></p>
-<p>{formData.Message}</p>
-</body></html>";
-
-            var emailMessage = new EmailMessage(
-                senderAddress: senderEmail,
-                recipientAddress: recipientEmail,
-                content: new EmailContent(subject) { Html = htmlContent });
-
-            await emailClient.SendAsync(Azure.WaitUntil.Started, emailMessage);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error enviando email");
-            return false;
         }
     }
 }
