@@ -97,32 +97,55 @@
         <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-slate-700">
           <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Envíame un mensaje</h3>
 
-          <form class="space-y-6">
+          <!-- Status Messages -->
+          @if (submitStatus === 'success') {
+            <div class="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center gap-3">
+              <svg class="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <p class="text-green-700 dark:text-green-300 text-sm">{{ statusMessage }}</p>
+            </div>
+          }
+
+          @if (submitStatus === 'error') {
+            <div class="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-center gap-3">
+              <svg class="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <p class="text-red-700 dark:text-red-300 text-sm">{{ statusMessage }}</p>
+            </div>
+          }
+
+          <form class="space-y-6" (ngSubmit)="onSubmit()">
             <div class="grid md:grid-cols-2 gap-6">
               <div>
                 <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Nombre
+                  Nombre <span class="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
+                  [(ngModel)]="formData.name"
                   class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 focus:border-transparent transition-all"
                   placeholder="Tu nombre"
+                  [disabled]="isSubmitting"
                   required
                 />
               </div>
 
               <div>
                 <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email
+                  Email <span class="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
+                  [(ngModel)]="formData.email"
                   class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 focus:border-transparent transition-all"
                   placeholder="tu@email.com"
+                  [disabled]="isSubmitting"
                   required
                 />
               </div>
@@ -136,34 +159,46 @@
                 type="text"
                 id="subject"
                 name="subject"
+                [(ngModel)]="formData.subject"
                 class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 focus:border-transparent transition-all"
                 placeholder="¿En qué puedo ayudarte?"
-                required
+                [disabled]="isSubmitting"
               />
             </div>
 
             <div>
               <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Mensaje
+                Mensaje <span class="text-red-500">*</span>
               </label>
               <textarea
                 id="message"
                 name="message"
                 rows="6"
+                [(ngModel)]="formData.message"
                 class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-400 focus:border-transparent transition-all resize-none"
                 placeholder="Cuéntame sobre tu proyecto..."
+                [disabled]="isSubmitting"
                 required
               ></textarea>
             </div>
 
             <button
               type="submit"
-              class="w-full px-8 py-4 bg-gradient-to-r from-blue-900 to-slate-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 flex items-center justify-center gap-2"
+              [disabled]="isSubmitting"
+              class="w-full px-8 py-4 bg-gradient-to-r from-blue-900 to-slate-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
-              <span>Enviar Mensaje</span>
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
+              @if (isSubmitting) {
+                <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Enviando...</span>
+              } @else {
+                <span>Enviar Mensaje</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              }
             </button>
           </form>
 
