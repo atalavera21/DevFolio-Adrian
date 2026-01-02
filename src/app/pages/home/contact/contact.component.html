@@ -7,7 +7,7 @@
       </h2>
       <div class="w-20 h-1 bg-gradient-to-r from-blue-900 to-slate-600 mx-auto rounded-full mb-6"></div>
       <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-        ¿Tienes un proyecto en mente? Estoy disponible para trabajar en tu próximo proyecto
+        ¿Tienes un proyecto desafiante? Conversemos sobre cómo podemos hacerlo realidad juntos
       </p>
     </div>
 
@@ -17,8 +17,8 @@
         <div>
           <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Conectemos</h3>
           <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-            Estoy abierto a nuevas oportunidades y colaboraciones. No dudes en contactarme para discutir
-            cómo puedo aportar valor a tu equipo o proyecto.
+            Si buscas un desarrollador que aporte soluciones técnicas sólidas y trabajo de calidad,
+            hablemos sobre tu proyecto y cómo puedo contribuir a su éxito.
           </p>
         </div>
 
@@ -26,7 +26,7 @@
         <div class="space-y-4">
           <!-- Email -->
           <a
-            href="mailto:[TU_EMAIL]"
+            [href]="'mailto:' + contactInfo.email"
             class="group flex items-start gap-4 p-6 bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-gray-100 dark:border-slate-700 hover:shadow-xl hover:border-blue-200 dark:hover:border-blue-800 transition-all"
           >
             <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -36,13 +36,13 @@
             </div>
             <div>
               <h4 class="font-semibold text-gray-900 dark:text-white mb-1">Email</h4>
-              <p class="text-blue-600 dark:text-blue-400 text-sm">[TU_EMAIL]</p>
+              <p class="text-blue-600 dark:text-blue-400 text-sm">{{ contactInfo.email }}</p>
             </div>
           </a>
 
           <!-- LinkedIn -->
           <a
-            href="[TU_LINKEDIN_URL]"
+            [href]="contactInfo.linkedin"
             target="_blank"
             rel="noopener noreferrer"
             class="group flex items-start gap-4 p-6 bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-gray-100 dark:border-slate-700 hover:shadow-xl hover:border-blue-200 dark:hover:border-blue-800 transition-all"
@@ -60,7 +60,7 @@
 
           <!-- GitHub -->
           <a
-            href="[TU_GITHUB_URL]"
+            [href]="contactInfo.github"
             target="_blank"
             rel="noopener noreferrer"
             class="group flex items-start gap-4 p-6 bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-gray-100 dark:border-slate-700 hover:shadow-xl hover:border-gray-300 dark:hover:border-slate-600 transition-all"
@@ -86,7 +86,7 @@
             <div>
               <h4 class="font-semibold text-gray-900 dark:text-white mb-1">Ubicación</h4>
               <p class="text-gray-700 dark:text-gray-300 text-sm font-medium">Lima, Perú</p>
-              <p class="text-gray-600 dark:text-gray-400 text-sm">Disponible para trabajar remotamente en cualquier parte del mundo 🌎</p>
+              <p class="text-gray-600 dark:text-gray-400 text-sm">Trabajo remoto • Colaboración flexible 🌎</p>
             </div>
           </div>
         </div>
@@ -168,7 +168,7 @@
           </form>
 
           <p class="mt-6 text-sm text-gray-500 dark:text-gray-400 text-center">
-            También puedes escribirme directamente a <a href="mailto:[TU_EMAIL]" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">[TU_EMAIL]</a>
+            También puedes escribirme directamente a <a [href]="'mailto:' + contactInfo.email" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">{{ contactInfo.email }}</a>
           </p>
         </div>
       </div>

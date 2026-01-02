@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(test:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(ng generate:*)",
+      "Bash(dotnet --version:*)",
+      "Bash(func:*)",
+      "Bash(az:*)",
+      "Bash(npm install:*)",
+      "Bash(dotnet add package:*)",
+      "Bash(dotnet add:*)"
     ]
   }
 }

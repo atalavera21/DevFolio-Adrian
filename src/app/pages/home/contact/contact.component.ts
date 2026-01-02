@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
-
+  readonly contactInfo = {
+    email: 'atalavera.0596@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/adriantalavera-dev/',
+    github: 'https://github.com/atalavera21'
+  };
 }

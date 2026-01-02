@@ -1,43 +1,31 @@
-<footer class="relative bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-700 transition-colors duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<footer class="relative bg-gradient-to-b from-white to-gray-50 dark:from-slate-900 dark:to-slate-950 border-t border-gray-200 dark:border-slate-700 transition-colors duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
     <!-- Main Footer Content -->
-    <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-      <!-- Left Side: Logo & Name -->
-      <div class="flex flex-col items-center md:items-start gap-4">
-        <div class="flex items-center gap-4">
-          <div class="w-14 h-14 bg-gradient-to-br from-blue-900 to-slate-700 rounded-xl flex items-center justify-center shadow-lg">
-            <span class="text-white font-bold text-2xl tracking-tight">&lt;/&gt;</span>
-          </div>
-          <div>
-            <h3 class="text-3xl font-bold bg-gradient-to-r from-blue-900 to-slate-700 bg-clip-text text-transparent">Adrián Talavera</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-400 font-medium">Full Stack .NET Developer</p>
-          </div>
-        </div>
-      </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-6">
 
-      <!-- Center: Quick Links -->
-      <nav class="flex gap-8">
+      <!-- Left: Quick Links -->
+      <nav class="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6">
         <a href="#about" class="text-gray-600 dark:text-gray-400 hover:text-blue-900 dark:hover:text-blue-400 transition-colors text-sm font-medium">
           Sobre mí
         </a>
-        <a href="#projects" class="text-gray-600 dark:text-gray-400 hover:text-blue-900 dark:hover:text-blue-400 transition-colors text-sm font-medium">
-          Proyectos
-        </a>
         <a href="#experience" class="text-gray-600 dark:text-gray-400 hover:text-blue-900 dark:hover:text-blue-400 transition-colors text-sm font-medium">
           Experiencia
+        </a>
+        <a href="#projects" class="text-gray-600 dark:text-gray-400 hover:text-blue-900 dark:hover:text-blue-400 transition-colors text-sm font-medium">
+          Proyectos
         </a>
         <a href="#contact" class="text-gray-600 dark:text-gray-400 hover:text-blue-900 dark:hover:text-blue-400 transition-colors text-sm font-medium">
           Contacto
         </a>
       </nav>
 
-      <!-- Right Side: Social Links -->
-      <div class="flex items-center gap-4">
+      <!-- Right: Social Links -->
+      <div class="flex items-center justify-center md:justify-end gap-3">
         <a
           href="[TU_LINKEDIN_URL]"
           target="_blank"
           rel="noopener noreferrer"
-          class="p-2.5 bg-gray-100 dark:bg-slate-800 hover:bg-blue-900 dark:hover:bg-blue-800 text-gray-700 dark:text-gray-300 hover:text-white transition-all duration-200 rounded-lg group"
+          class="p-2 bg-gray-100 dark:bg-slate-800 hover:bg-blue-900 dark:hover:bg-blue-800 text-gray-700 dark:text-gray-300 hover:text-white transition-all duration-200 rounded-lg hover:scale-110"
           aria-label="LinkedIn"
         >
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -48,7 +36,7 @@
           href="[TU_GITHUB_URL]"
           target="_blank"
           rel="noopener noreferrer"
-          class="p-2.5 bg-gray-100 dark:bg-slate-800 hover:bg-gray-900 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-white transition-all duration-200 rounded-lg"
+          class="p-2 bg-gray-100 dark:bg-slate-800 hover:bg-gray-900 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-white transition-all duration-200 rounded-lg hover:scale-110"
           aria-label="GitHub"
         >
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -57,7 +45,7 @@
         </a>
         <a
           href="mailto:[TU_EMAIL]"
-          class="p-2.5 bg-gray-100 dark:bg-slate-800 hover:bg-slate-700 dark:hover:bg-slate-600 text-gray-700 dark:text-gray-300 hover:text-white transition-all duration-200 rounded-lg"
+          class="p-2 bg-gray-100 dark:bg-slate-800 hover:bg-slate-700 dark:hover:bg-slate-600 text-gray-700 dark:text-gray-300 hover:text-white transition-all duration-200 rounded-lg hover:scale-110"
           aria-label="Email"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,24 +55,23 @@
       </div>
     </div>
 
-    <!-- Divider -->
-    <div class="mt-8 pt-8 border-t border-gray-200 dark:border-slate-700">
-      <div class="flex flex-col items-center gap-3">
-        <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-sm">
-          <!-- <p class="text-gray-600 dark:text-gray-400">
-            © {{ currentYear }} Adrián Talavera. Todos los derechos reservados.
-          </p> -->
-          <span class="hidden md:inline text-gray-300 dark:text-gray-600">•</span>
-          <p class="text-gray-600 dark:text-gray-400 font-medium">
-            Desarrollado por Adrián Talavera
-          </p>
-        </div>
-        <p class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+    <!-- Bottom Section: Copyright & Location -->
+    <div class="pt-6 border-t border-gray-200 dark:border-slate-800">
+      <div class="flex flex-col justify-center items-center gap-2 text-sm">
+        
+
+        <!-- Location -->
+        <div class="flex items-center gap-2 text-gray-500 dark:text-gray-500">
           <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
           Lima, Perú
+        </div>
+
+        <!-- Developed by -->
+        <p class="text-gray-600 dark:text-gray-400">
+          Desarrollado por <span class="font-semibold text-blue-900 dark:text-blue-400">Adrián Talavera</span>
         </p>
       </div>
     </div>
