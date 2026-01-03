@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://func-portafolio-contacto.azurewebsites.net/api'
+  apiUrl: 'https://func-portfolio-contact-cnardchke8h9hugv.centralus-01.azurewebsites.net/api'
 };
