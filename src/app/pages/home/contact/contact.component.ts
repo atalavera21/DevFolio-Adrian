@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 interface ContactForm {
   name: string;
@@ -32,7 +33,6 @@ export class ContactComponent {
     github: 'https://github.com/atalavera21'
   };
 
-  // Estado del formulario
   formData: ContactForm = {
     name: '',
     email: '',
@@ -45,7 +45,6 @@ export class ContactComponent {
   statusMessage = '';
 
   async onSubmit(): Promise<void> {
-    // Validación básica
     if (!this.formData.name || !this.formData.email || !this.formData.message) {
       this.showStatus('error', 'Por favor completa todos los campos requeridos');
       return;
@@ -56,7 +55,7 @@ export class ContactComponent {
 
     try {
       const response = await this.http
-        .post<ApiResponse>('/api/SaveContactMessage', this.formData)
+        .post<ApiResponse>(`${environment.apiUrl}/SaveContactMessage`, this.formData)
         .toPromise();
 
       if (response?.success) {
@@ -84,7 +83,6 @@ export class ContactComponent {
     this.submitStatus = status;
     this.statusMessage = message;
 
-    // Auto-ocultar mensaje después de 5 segundos
     setTimeout(() => {
       this.submitStatus = 'idle';
       this.statusMessage = '';
