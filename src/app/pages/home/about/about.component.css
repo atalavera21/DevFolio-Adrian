@@ -1,0 +1,12 @@
+/* Ensure spacing works in production builds */
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
