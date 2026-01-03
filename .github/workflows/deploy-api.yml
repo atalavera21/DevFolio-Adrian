@@ -1,0 +1,39 @@
+name: Deploy API to Azure Functions
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'api/**'
+  workflow_dispatch:
+
+env:
+  AZURE_FUNCTIONAPP_NAME: 'func-portfolio-contact'
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'api'
+  DOTNET_VERSION: '8.0.x'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build project
+        run: |
+          cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          dotnet restore
+          dotnet build --configuration Release --output ./output
+
+      - name: Deploy to Azure Functions
+        uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
