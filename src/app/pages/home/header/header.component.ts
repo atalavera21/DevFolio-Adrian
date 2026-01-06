@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -9,13 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   isVisible = false;
-  technologies = ['JavaScript', 'TypeScript', 'Angular', 'React', 'Node.js'];
   displayedTitle = '';
+  cvUrl = `${environment.apiUrl}/cv`;
+  
   private fullTitle = '.NET Developer';
-  private typingSpeed = 100; // milliseconds per character
+  private typingSpeed = 100;
 
   ngOnInit() {
-    // Agregamos un pequeño delay para la animación inicial
     setTimeout(() => {
       this.isVisible = true;
       this.startTypingEffect();
@@ -33,5 +34,4 @@ export class HeaderComponent implements OnInit {
       }
     }, this.typingSpeed);
   }
-
 }
