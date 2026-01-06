@@ -1,39 +1,47 @@
-name: Deploy API to Azure Functions
+name: Deploy Frontend to Static Web App
 
 on:
   push:
     branches:
       - develop
-    paths:
-      - 'api/**'
-  workflow_dispatch:
-
-env:
-  AZURE_FUNCTIONAPP_NAME: 'func-portafolio-contacto'
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'api'
-  DOTNET_VERSION: '8.0.x'
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - develop
+  workflow_dispatch: # <--- ESTO te permite lanzarlo manualmente desde el botón de GitHub
 
 jobs:
-  build-and-deploy:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
+    name: Build and Deploy Job
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v4 # Actualizado a la v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          submodules: true
+          lfs: false
 
-      - name: Build project
-        run: |
-          cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          dotnet restore
-          dotnet build --configuration Release --output ./output
-
-      - name: Deploy to Azure Functions
-        uses: Azure/functions-action@v1
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
         with:
-          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_SMOKE_0D167560F }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          ###### Configuración de Rutas ######
+          app_location: "/" # Donde está el package.json de Angular
+          api_location: "" # Lo dejamos vacío porque tu API se despliega con el otro YAML
+          output_location: "dist/dev-folio/browser" # <-- VERIFICA ESTO ABAJO
+          ###### Fin de Configuración ######
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_SMOKE_0D167560F }}
+          action: "close"
