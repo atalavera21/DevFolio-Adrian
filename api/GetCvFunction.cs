@@ -23,7 +23,7 @@ public class GetCvFunction
 
         try
         {
-            var connectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
+            var connectionString = Environment.GetEnvironmentVariable("CV_STORAGE_CONNECTION_STRING");
             
             if (string.IsNullOrEmpty(connectionString))
             {

@@ -104,11 +104,10 @@
             </svg>
           </a>
           <a
-            href="/api/cv"
-            download
-            class="px-8 py-4 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 rounded-lg font-semibold hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white dark:hover:text-slate-900 transition-all duration-200 w-full sm:w-auto text-center"
+            [href]="cvUrl"
             target="_blank"
-            >
+            class="px-8 py-4 border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 rounded-lg font-semibold hover:bg-blue-600 dark:hover:bg-blue-400 hover:text-white dark:hover:text-slate-900 transition-all duration-200 w-full sm:w-auto text-center"
+          >
             Descargar CV
           </a>
         </div>
