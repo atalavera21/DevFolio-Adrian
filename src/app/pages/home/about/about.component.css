@@ -1,5 +1,5 @@
 /* Ensure spacing works in production builds */
-.space-y-6 > * + * {
+.space-y-6>*+* {
   margin-top: 1.5rem;
 }
 
@@ -9,4 +9,45 @@
 
 .gap-3 {
   gap: 0.75rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+/* Code mockup typing animation */
+.code-line {
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  min-height: 1.5em;
+}
+
+.code-line-hidden {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+/* Redesign Improvements — Layout only to avoid build issues */
+.code-mockup-wrapper {
+  height: 520px;
+  /* Fixed height for consistency */
+  display: flex;
+  flex-direction: column;
+}
+
+.code-content-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  /* Allow internal scroll if snippet is too long, but keep container fixed */
+  max-height: 420px;
+  /* Specific height for the code area */
+}
+
+.work-card-base {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

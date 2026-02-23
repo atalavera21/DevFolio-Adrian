@@ -9,7 +9,10 @@
       "Bash(az:*)",
       "Bash(npm install:*)",
       "Bash(dotnet add package:*)",
-      "Bash(dotnet add:*)"
+      "Bash(dotnet add:*)",
+      "Bash(cd:*)",
+      "Bash(tree:*)",
+      "Bash(wc:*)"
     ]
   }
 }
